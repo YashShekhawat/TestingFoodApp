@@ -13,13 +13,19 @@ const RestaurantDetails = () => {
     // const { name, cuisines, costForTwoMessage } = resInfo?.cards[0]?.card?.card?.info;
     // const { itemCards } = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
+    //https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.96340&lng=77.58550&restaurantId=41105&isMenuUx4=true&submitAction=ENTER
 
-    const { itemCards } = resInfo?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
-        || resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card; 1
-    const { name, areaName, avgRatingString, totalRatingsString, cuisines } = resInfo?.cards[0]?.card?.card.info;
+    // const { itemCards } = resInfo?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card || resInfo?.cards[5].groupedCard.cardGroupMap.REGULAR.cards
+    //     || resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card; 
 
-    console.log("hello", name);
-    console.log(resInfo?.cards[0]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card);
+    const { itemCards } = resInfo?.cards[5].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards;
+    console.log("new Data", resInfo?.cards[5].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards);
+    console.log("itemcards", { itemCards })
+
+    const itemCardsValue = resInfo?.cards[5].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards;
+    //Destructuring for the Top heading [ Restaurant Name and Info in the menu page]
+    const { name, areaName, avgRatingString, totalRatingsString, cuisines } = resInfo?.cards[2]?.card?.card.info;
+    // const { name, areaName, avgRatingString, totalRatingsString, cuisines } = resInfo?.cards[5].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards[0].card.info;
 
     return (
 
@@ -30,7 +36,7 @@ const RestaurantDetails = () => {
                         <div className="card-body flex mx-10">
                             <h1 className="card-title font text-2xl">{name}</h1>
                             <p className="font-sans text-sm">{areaName}</p>
-                            <p className="font-sans text-sm">{cuisines.join(", ")}</p>
+                            {/* <p className="font-sans text-sm">{cuisines.join(", ")}</p> */}
                         </div>
                         <div className="mx-20 bg-white  border border-gray-200 rounded-lg shadow hover:bg-gray-100 py-5 px-2 ">
                             <div className="flex items-center justify-center ">
@@ -46,19 +52,19 @@ const RestaurantDetails = () => {
 
                 <ul className=" flex flex-wrap items-center justify-center">
                     {/* {itemCards.map((item) => (<li>{item.card.info.name}</li>))} */}
-                    {itemCards?.map((item, index) => (
+                    {itemCardsValue?.map((item, index) => (
                         <li key={item?.card?.info?.id} className="m-2">
-                            {/* {item?.card?.info?.name} - {" Rs "} {item?.card?.info?.price / 100} */}
                             <a href="#" className="p-5 flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                <img className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={CDN_URL + item?.card?.info?.imageId} />
+                                <img className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={CDN_URL + item?.card?.info?.imageId} alt={item?.card?.info?.name} />
                                 <div className="flex flex-col justify-between p-4 leading-normal">
                                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item?.card?.info?.name}</h5>
                                     <p className="mb-3 font-xl font-bold text-green-500 dark:text-gray-400">{" Rs "} {item?.card?.info?.price / 100}</p>
                                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{item?.card?.info?.description}</p>
                                 </div>
                             </a>
-                      </li>
+                        </li>
                     ))}
+
                 </ul>
 
 

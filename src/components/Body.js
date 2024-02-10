@@ -25,20 +25,25 @@ const Body = () => {
 
     const fetchData = async () => {
         try {
-            const data = await fetch("https://corsproxy.io/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D19.2704628%26lng%3D72.8709166%26page_type%3DDESKTOP_WEB_LISTING");
+            // const data = await fetch("   ");
+            const MoreData = await fetch("https://www.swiggy.com/mapi/homepage/getCards?lat=12.96340&lng=77.58550");
 
-            const json = await data.json();
+            // const json = await data.json();
+            const json2 = await MoreData.json();
 
-            console.log("resdata", json.data);
+            // console.log("resdata", json.data);
 
             // setlistofRestaurant(json?.data?.cards[2]?.data?.data?.cards);
             // console.log("dasdad", json.data.success.cards[1].gridWidget.gridElements.infoWithStyle.restaurants);
             // setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
 
 
-            setlistofRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle.restaurants);
-            setFilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle.restaurants);
-            console.log(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle.restaurants);
+            // setlistofRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle.restaurants);
+            setlistofRestaurant(json2?.data.success.cards[4].gridWidget.gridElements.infoWithStyle.restaurants);
+            setFilteredRestaurant(json2?.data.success.cards[4].gridWidget.gridElements.infoWithStyle.restaurants);
+            // console.log(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle.restaurants);
+            // console.log(json2?.data.success.cards[4].gridWidget.gridElements.infoWithStyle.restaurants);
+
         } catch (error) {
             console.log(error);
         }

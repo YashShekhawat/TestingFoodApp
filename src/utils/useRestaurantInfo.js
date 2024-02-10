@@ -12,8 +12,12 @@ const useRestaurantInfo = (resId) => {
     const fetchRestaurant = async () => {
         // const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=${resId}`);
         const data = await fetch(
-            `https://corsproxy.io/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Fmenu%2Fpl%3Fpage-type%3DREGULAR_MENU%26complete-menu%3Dtrue%26lat%3D16.2893144%26lng%3D80.4604643%26restaurantId%3D${resId}%26catalog_qa%3Dundefined`);
+            // `https://corsproxy.io/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Fmenu%2Fpl%3Fpage-type%3DREGULAR_MENU%26complete-menu%3Dtrue%26lat%3D16.2893144%26lng%3D80.4604643%26restaurantId%3D${resId}%26catalog_qa%3Dundefined`);
+            // `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=16.2893144&lng=80.4604643&restaurantId=${resId}&catalog_qa=undefined`);
+            `https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.96340&lng=77.58550&restaurantId=${resId}&isMenuUx4=true&submitAction=ENTER`);
         // `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=16.2893144&lng=80.4604643&restaurantId=${resId}&catalog_qa=undefined`);
+        //https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.96340&lng=77.58550&restaurantId=${resId}&isMenuUx4=true&submitAction=ENTER
+
         const json = await data.json();
         setResInfo(json.data);
         console.log("res menu", json.data);
